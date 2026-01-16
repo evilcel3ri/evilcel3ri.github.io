@@ -48,7 +48,7 @@ exit 0
 ```
 As you can see, the content of rc.local is the fake kernel worker process name.
 
-![Function creating the systemd service](/assests/systemd-systemd.png)
+![Function creating the systemd service](/assets/images/systemd-systemd.png)
 
 **Files Created:**
 - `/etc/systemd/system/rc-local.service` - SystemD unit file
@@ -78,7 +78,7 @@ func_syscall_X("chattr +i /usr/lib64/libkwrk.so.1.5.3 >/dev/null 2>&1")  // Make
 
 The thing that took me the most time to figure out was that byte section called with `memcpy`. I confess that I used Claude to figure out that part of the sample and then went double checking with the internal Linux documentation. The malware implements an anti-termination mechanism to prevent being shut down via standard signals. Meaning you can't CTRL-C out of the problem here (fun thing to know that exists). The function `func_mem_analyse` (at address `0x4036ac`) registers a custom signal handler for 11 different signals using the following hardcoded byte pattern:
 
-![Function registering signal handlers](/assests/systemd-bytes.png)
+![Function registering signal handlers](/assets/images/systemd-bytes.png)
 
 ```
 \x01\x00\x00\x00\x02\x00\x00\x00\x03\x00\x00\x00\x04\x00\x00\x00\x06\x00\x00\x00\x08\x00\x00\x00\x0f\x00\x00\x00\x0a\x00\x00\x00\x0c\x00\x00\x00\x11\x00\x00\x00\x0b\x00\x00\x00
@@ -140,7 +140,7 @@ Here are the commands defined in the malware:
 
 Now this is the part I couldn't figure it out entirely. There is a specific identifier in the code: `PE8237` that doesn't ring a bell on anything. Interestingly, this is checked in `sub_403605` before the code spawns a shell, meaning it must have some kind of interest for the attacker. Is is a victim identifier? Something part of a larger campaign? Are there some particular Arch Linux users that hold state secrets? Maybe someone want to know how to Arch? I don't know. It's significant without giving me any answer and it's bothering me.
 
-[PE8237](/assets/images/systemd-pe.png)
+![PE8237](/assets/images/systemd-pe.png)
 
 ---
 
