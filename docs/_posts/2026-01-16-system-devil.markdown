@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "System Devil: From AUR to SystemD persistence"
+title: "System Devil: From AUR to Systemd persistence"
 date: 2026-01-16
 ---
 
