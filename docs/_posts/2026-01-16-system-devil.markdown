@@ -34,7 +34,7 @@ First the malware disguises itself as a legitimate Linux kernel worker thread:
 
 This function scans `/proc` to check if the malware is already running under the disguised process name to prevent. Fun thing, a quick Google search doesn't show anything about that specific process. But well, you know Arch Linux users, their system might be very specific.
 
-![Function listing processus to find if there isn't another one running with the same name](/assets/systemd-proc.png)
+![Function listing processus to find if there isn't another one running with the same name](/assets/images/systemd-proc.png)
 
 ### 2. Persistence Mechanism
 
@@ -120,7 +120,7 @@ The C2 server is the same as the dropper server, which is unusual for the type o
 | **Port** | 443 |
 | **Protocol** | TLS/SSL |
 
-![C2 setup](/assets/systemd-c2.png)
+![C2 setup](/assets/images/systemd-c2.png)
 
 The C2 allows multiple commands to be sent at once, separated by a semicolon. The commands are executed in the order they are received.
 
@@ -134,13 +134,13 @@ Here are the commands defined in the malware:
 | `C` | `0x43` | Spawn `/bin/bash` for remote shell access |
 
 
-![Command & Control](/assets/systemd-c2_2.png)
+![Command & Control](/assets/images/systemd-c2_2.png)
 
 ### 6. Unique Identifiers
 
 Now this is the part I couldn't figure it out entirely. There is a specific identifier in the code: `PE8237` that doesn't ring a bell on anything. Interestingly, this is checked in `sub_403605` before the code spawns a shell, meaning it must have some kind of interest for the attacker. Is is a victim identifier? Something part of a larger campaign? Are there some particular Arch Linux users that hold state secrets? Maybe someone want to know how to Arch? I don't know. It's significant without giving me any answer and it's bothering me.
 
-[PE8237](/assets/systemd-pe.png)
+[PE8237](/assets/images/systemd-pe.png)
 
 ---
 
