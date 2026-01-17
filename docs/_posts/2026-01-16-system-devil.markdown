@@ -51,11 +51,11 @@ As you can see, the content of rc.local is the fake kernel worker process name.
 ![Function creating the systemd service](/assets/images/systemd-systemd.png)
 
 **Files Created:**
-- `/etc/systemd/system/rc-local.service` - SystemD unit file
+- `/etc/systemd/system/rc-local.service` - Systemd unit file
 - `/etc/rc.local` - Startup script that launches the malware
 
 
-**SystemD Commands Executed:**
+**Systemd Commands Executed:**
 ```bash
 systemctl daemon-reload >/dev/null 2>&1
 systemctl enable rc-local.service >/dev/null 2>&1
